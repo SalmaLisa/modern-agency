@@ -24,15 +24,11 @@ export default function Navbar() {
           </a>
         </div>
 
-        <button
-          className="
-            flex h-8 w-8 items-center justify-center
-            rounded-full bg-blue-600
-            text-xs text-white
-          "
-        >
-          +
-        </button>
+        <a href="/edit"
+          className="bg-blue-950 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full">
+  Edit This Page
+
+        </a>
 
       </div>
     </header>

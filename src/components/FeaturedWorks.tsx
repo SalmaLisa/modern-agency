@@ -1,10 +1,17 @@
+
 "use client";
 
-import { projects } from "@/data/projects";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import type { WebsiteContent } from "@/app/page";
 
-export default function FeaturedWorks() {
+type FeaturedWorksProps = {
+  content: WebsiteContent;
+};
+
+export default function FeaturedWorks({
+  content,
+}: FeaturedWorksProps) {
   return (
     <section
       id="work"
@@ -20,57 +27,63 @@ export default function FeaturedWorks() {
             </span>
           </h2>
 
-          <button className="hidden rounded-3xl border border-gray-300 px-4 py-2 text-[13px] hover:text-blue-500 md:block">
+          <button
+            type="button"
+            className="hidden rounded-3xl border border-gray-300 px-4 py-2 text-[13px] hover:text-blue-500 md:block"
+          >
             See All Projects →
           </button>
         </div>
 
         {/* Projects Slider */}
-        <Swiper
-          spaceBetween={24}
-          slidesPerView={1.2}
-          breakpoints={{
-            768: {
-              slidesPerView: 1,
-            },
-            1280: {
-              slidesPerView: 1.5,
-            },
-          }}
-        >
-          {projects.map((project) => (
-            <SwiperSlide key={project.title}>
-              <article>
-                <div className="group relative aspect-[1.35] overflow-hidden rounded-xl bg-gray-200">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="
-                      h-full
-                      w-full
-                      object-cover
-                      transition-transform
-                      duration-700
-                      group-hover:scale-105
-                    "
-                  />
+        {content.projects.length > 0 ? (
+          <Swiper
+            spaceBetween={24}
+            slidesPerView={1.2}
+            breakpoints={{
+              768: {
+                slidesPerView: 1,
+              },
+              1280: {
+                slidesPerView: 1.5,
+              },
+            }}
+          >
+            {content.projects.map((project, index) => (
+              <SwiperSlide
+                key={`${project.title}-${index}`}
+              >
+                <article>
+                  <div className="group relative aspect-[1.35] overflow-hidden rounded-xl bg-gray-200">
+                    {project.image && (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
 
-                  <span className="absolute left-5 top-5 text-xs text-white">
-                    {project.year}
-                  </span>
-                </div>
+                    <span className="absolute left-5 top-5 text-xs text-white">
+                      {project.year}
+                    </span>
+                  </div>
 
-                <h3 className="mt-4 text-3xl font-medium text-blue-500">
-                  {project.title}
-                </h3>
+                  <h3 className="mt-4 text-3xl font-medium text-blue-500">
+                    {project.title}
+                  </h3>
 
-                <p className="mt-1 text-[14px] text-black/40">
-                  {project.category}
-                </p>
-              </article>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                  <p className="mt-1 text-[14px] text-black/40">
+                    {project.category}
+                  </p>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <p className="py-10 text-sm text-gray-500">
+            No projects have been added yet.
+          </p>
+        )}
       </div>
     </section>
   );
