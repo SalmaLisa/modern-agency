@@ -299,7 +299,7 @@ export default function EditPage() {
 async function saveChanges() {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/website-content",
+      `${API_URL}/api/website-content`,
       {
         method: "PUT",
         headers: {
