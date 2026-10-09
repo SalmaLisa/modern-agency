@@ -77,7 +77,7 @@ services: [],
 async function getWebsiteContent(): Promise<WebsiteContent> {
 try {
 const response = await fetch(
-`${API_URL}api/website-content`,
+`${API_URL}/api/website-content`,
 { cache: "no-store" }
 );
 
